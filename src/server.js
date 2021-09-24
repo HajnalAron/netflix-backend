@@ -14,6 +14,12 @@ server.use(express.static(publicFolderPath));
 
 server.use("/media", mediaRouter);
 server.use("/reviews", reviewsRouter);
+
+server.use(badRequestErrorHandler);
+server.use(notFoundErrorHandler);
+server.use(forbiddenErrorHandler);
+server.use(genericServerErrorHandler);
+
 console.table(listEndpoints(server));
 
 server.listen(port, () => {
