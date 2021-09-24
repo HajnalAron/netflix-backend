@@ -26,6 +26,18 @@ const writeReviewsJSON = async (dataToWrite) => {
   await writeJSONFile(reviewsJSONPath, dataToWrite);
 };
 
+export const getReviewsByImdbId = async (ImdbId) => {
+  const reviews = await readReviewsJSON();
+  filteredReviews = reviews.filter((review) => (review.imdbID = ImdbId));
+  return filteredReviews;
+};
+
+export const getReviewByReviewId = async (id) => {
+  const reviews = await readReviewsJSON();
+  targetReview = reviews.filter((review) => (review._id = id));
+  return targetReview;
+};
+
 export const newReview = async (id, reviewBody) => {
   let success = false;
   let message = `Media with the id of ${id} doesn't exist. You can only attach reviews to a valid media.`;
@@ -36,7 +48,8 @@ export const newReview = async (id, reviewBody) => {
     const newReview = {
       ...reviewBody,
       _id: uniqid(),
-      createdAt: new Date()
+      createdAt: new Date(),
+      imdbID: id
     };
     previousReviews.push(newReview);
     await writeReviewsJSON(previousReviews);
