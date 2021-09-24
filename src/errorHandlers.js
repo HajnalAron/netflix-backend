@@ -1,4 +1,4 @@
-export const badRequestError = (err, req, res, next) => {
+export const badRequestErrorHandler = (err, req, res, next) => {
   if (err.status === 400) {
     res.status(400).send(err);
   } else {

@@ -4,6 +4,12 @@ import listEndpoints from "express-list-endpoints";
 import { publicFolderPath } from "../tools/filesystem.js";
 import mediaRouter from "../services/media/index.js";
 import reviewsRouter from "../services/reviews/index.js";
+import {
+  badRequestErrorHandler,
+  notFoundErrorHandler,
+  forbiddenErrorHandler,
+  genericServerErrorHandler
+} from "./errorHandlers.js";
 
 const server = express();
 export const port = process.env.PORT || 3001;
