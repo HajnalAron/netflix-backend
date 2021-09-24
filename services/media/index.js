@@ -15,7 +15,7 @@ mediaRouter.post("/", async (req, res, next) => {
     const newMedia = await createNewMedia(req.body);
     if (newMedia.success === true) {
       res.status(201).send(newMedia);
-    } else next(createHttpError(404, newMedia.message));
+    } else next(createHttpError(400, newMedia.message));
   } catch (error) {
     next(error);
   }
